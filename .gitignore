@@ -1,1 +1,6 @@
-.hidder/priv~a/*.hidder/priv~a/*.hidder/priv~a/*.hidder/priv~a/*
+./Main.exe
+./Main.*
+**/Main.*
+**/Main
+.hider/*
+.hidder/priv~a/*

@@ -20,6 +20,10 @@
 int hidder_init(int argc, char **argv);
 int hidder_status(int argc, char **argv);
 int hidder_add(int argc, char **argv);
+int hidder_help(int argc, char **argv);
+int hidder_git(int argc, char **argv);
+int hidder_push(int argc, char **argv);
+int hidder_restore(int argc, char **argv);
 
 // all cmds //
 
@@ -32,5 +36,9 @@ static const cmd_define_t ALL_CMDS[] = {
     {"init", hidder_init},
     {"status", hidder_status},
     {"add", hidder_add},
+    {"help", hidder_help},
+    {"git", hidder_git},
+    {"push", hidder_push},
+    {"restore", hidder_restore},
     {NULL, NULL} // termination
 };

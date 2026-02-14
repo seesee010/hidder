@@ -44,7 +44,7 @@ int hidder_init(int argc, char **argv) {
         return 1;
     }
 
-    fprintf(file, ".hidder/priv~a/*");
+    fprintf(file, "\n.hidder/priv~a/*\n");
 
     fclose(file);
 
@@ -86,5 +86,26 @@ int hidder_add(int argc, char **argv) {
         // return hidder_add_file(0, argv[0]);
     }
 
+    return 0;
+}
+
+int hidder_help(int argc, char **argv) {
+
+    fprintf(stdout, "\n[DEBUG:]");
+    fprintf(stdout, "\nThis command is an additional cmd, from github (see: https://github.com/seesee010/hidder.git)\n");
+    list_cmds();
+}
+
+int hidder_git(int argc, char **argv) {
+    // add -> push - system: hide -> git push -> restore 
+    
+    return  hidder_push(0, NULL) | system("git push") | hidder_restore(0, NULL);
+}
+
+int hidder_push(int argc, char **argv) {
+    return 0;
+}
+
+int hidder_restore(int argc, char **argv) {
     return 0;
 }

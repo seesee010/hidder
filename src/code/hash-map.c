@@ -97,3 +97,10 @@ void list_cmds() {
         fprintf(stdout, " ~> %s\n", entry->name);
     }
 }
+
+void edit_file(char *filename, char *lineInput) {
+    
+    FILE *file = fopen(filename, "r");
+
+
+}
