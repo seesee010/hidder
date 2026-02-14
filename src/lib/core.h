@@ -19,6 +19,7 @@
 
 int hidder_init(int argc, char **argv);
 int hidder_status(int argc, char **argv);
+int hidder_add(int argc, char **argv);
 
 // all cmds //
 
@@ -30,5 +31,6 @@ typedef struct {
 static const cmd_define_t ALL_CMDS[] = {
     {"init", hidder_init},
     {"status", hidder_status},
+    {"add", hidder_add},
     {NULL, NULL} // termination
 };

@@ -25,13 +25,13 @@ void register_all_commands() {
 int add_cmd(const char *name, cmd_func func) {
 
     if (name == NULL) {
-        fprintf(stdout, "-- reach/ADD-CMD: --\n");
+        fprintf(stdout, "\n-- reach/ADD-CMD: --\n");
         fprintf(stderr, "[ERROR:] Invalid name!");
         return 1;
     }
 
     if (func == NULL) {
-        fprintf(stdout, "-- reach/ADD-CMD: --\n");
+        fprintf(stdout, "\n-- reach/ADD-CMD: --\n");
         fprintf(stderr, "[ERROR:] Invalid func!");
         return 1;
     }
@@ -47,13 +47,13 @@ int add_cmd(const char *name, cmd_func func) {
 int call_cmd(const char *name, int argc, char **argv) {
 
     if (name == NULL) {
-        fprintf(stdout, "-- reach/CALL-CMD: --\n");
+        fprintf(stdout, "\n-- reach/CALL-CMD: --\n");
         fprintf(stderr, "[ERROR:] Invalid name!");
         return 1;
     }
 
     if (argc < 0) {
-        fprintf(stdout, "-- reach/CALL-CMD: --\n");
+        fprintf(stdout, "\n-- reach/CALL-CMD: --\n");
         fprintf(stderr, "[ERROR:] Invalid argument size!");
         return 1;
     }
@@ -62,8 +62,10 @@ int call_cmd(const char *name, int argc, char **argv) {
     HASH_FIND_STR(cmds, name, entry);
 
     if (!entry) {
-        fprintf(stdout, "-- reach/CALL-CMD: --\n");
+        fprintf(stdout, "\n-- reach/CALL-CMD: --\n");
         fprintf(stderr, "[ERROR:] Unknown command!: %s\n", name);
+        
+        list_cmds();
         return 1;
     }
 
@@ -87,9 +89,11 @@ void free_cmds() {
 void list_cmds() {
     cmd_entry_t *entry, *tmp;
 
-    fprintf(stdout, "-- reach/LIST-ALL: --\n");
+    fprintf(stdout, "\n-- reach/LIST-ALL: --\n");
     fprintf(stdout, "[DEBUG:] Available cmds:");
+
+    fprintf(stdout, "\n");
     HASH_ITER(hh, cmds, entry, tmp) {
-        fprintf(stdout, " - %s\n", entry->name);
+        fprintf(stdout, " ~> %s\n", entry->name);
     }
 }
