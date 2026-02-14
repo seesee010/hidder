@@ -31,22 +31,27 @@ int hidder_status(int argc, char **argv) {
 
 int hidder_init(int argc, char **argv) {
 
-    const char *filename = ".gitignore";
+    printf("%s", argv[0]);
 
-    if (filename == NULL) {
-        return 1;
+    if (argv[0] == "--force") {
+
+        const char *filename = ".gitignore";
+
+        if (filename == NULL) {
+            return 1;
+        }
+        FILE *file = fopen(filename, "a");
+
+        if (file == NULL) {
+            fprintf(stdout, "\n-- cmds/init: --\n");
+            fprintf(stdout, "[ERROR:] The right file could not been found!");  
+            return 1;
+        }
+
+        fprintf(file, "\n.hidder/priv~a/*\n");
+
+        fclose(file);
     }
-    FILE *file = fopen(filename, "a");
-
-    if (file == NULL) {
-        fprintf(stdout, "\n-- cmds/init: --\n");
-        fprintf(stdout, "[ERROR:] The right file could not been found!");  
-        return 1;
-    }
-
-    fprintf(file, "\n.hidder/priv~a/*\n");
-
-    fclose(file);
 
     MKDIR(".hidder");
 
