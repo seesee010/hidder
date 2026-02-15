@@ -101,6 +101,5 @@ void list_cmds() {
 void edit_file(char *filename, char *lineInput) {
     
     FILE *file = fopen(filename, "r");
-
-
+    
 }

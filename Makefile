@@ -1,6 +1,7 @@
 SRC = src/code/all_cmds.c \
 			src/code/hash-map.c \
-			src/code/main.c 
+			src/code/main.c \
+			src/code/cmd-helper.c
 
 # target detection
 ifeq ($(OS),Windows_NT)

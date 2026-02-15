@@ -20,6 +20,7 @@
 
 #include "../lib/core.h"
 #include "../lib/hash-map.h"
+#include "../lib/additional.h"
 
 int hidder_status(int argc, char **argv) {
 
@@ -28,31 +29,11 @@ int hidder_status(int argc, char **argv) {
     return 0;
 }
 
-int writeIntoFile(char *filename, char *buffer) {
-
-    if (buffer == NULL) {
-        return 1;
-    }
-
-    if (filename == NULL) {
-        return 1;
-    }
-
-    FILE *file = fopen(filename, "r+");
-
-    if (file == NULL) {
-        return 1;
-    }
-
-    fprintf("%s\n", buffer);
-    fclose(file);
-    return 0;
-}
-
 int hidder_init(int argc, char **argv) {
 
     printf("%s", argv[0]);
 
+    // add to gitignore if hidder init --force
     if (argv[0] == "--force") {
 
         const char *filename = ".gitignore";
@@ -76,17 +57,15 @@ int hidder_init(int argc, char **argv) {
     MKDIR(".hidder");
 
     MKDIR(".hidder/priv~a");
-    MKDIR(".hidder/pub~a");
+    MKDIR(".hidder/pub~b");
 
-    FILE *file2 = fopen(".hidder/priv~a/keys.yaml", "a");
-    fprintf(file2, "");
-    fclose(file2);
+    int result;
+    result = writeIntoFile(".hidder/priv~a/keys.yml", "", "w+");
 
-    FILE *file3 = fopen(".hidder/pub~a/settings.yaml", "a");
-    fprintf(file3, "");
-    fclose(file3);
+    result |= writeIntoFile(".hidder/pub~b/settings.yml", "", "w+");
+    result |= writeIntoFile(".hidder/pub~b/file-list.txt", "", "w+");
 
-    return 0;
+    return result;
 }
 
 int hidder_add(int argc, char **argv) {
@@ -94,7 +73,7 @@ int hidder_add(int argc, char **argv) {
     if (argv[0] == NULL) {
 
         fprintf(stdout, "\n-- cmds/add: --\n");
-        fprintf(stdout, "[ERROR:] Nothing to add!");  
+        fprintf(stdout, "[ERROR:] No files selected!");  
         return 1;      
     }
 
@@ -106,12 +85,8 @@ int hidder_add(int argc, char **argv) {
         return 1;
     }
 
-    // ..must be a filename by now...
-    else {
-        // return hidder_add_file(0, argv[0]);
-    }
-
-    return 0;
+    // ...must be a filename by now...
+    return writeIntoFile(".hidder/pub~b/file-list.txt", argv[0], "a");
 }
 
 int hidder_help(int argc, char **argv) {
