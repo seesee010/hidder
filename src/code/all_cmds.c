@@ -28,6 +28,26 @@ int hidder_status(int argc, char **argv) {
     return 0;
 }
 
+int writeIntoFile(char *filename, char *buffer) {
+
+    if (buffer == NULL) {
+        return 1;
+    }
+
+    if (filename == NULL) {
+        return 1;
+    }
+
+    FILE *file = fopen(filename, "r+");
+
+    if (file == NULL) {
+        return 1;
+    }
+
+    fprintf("%s\n", buffer);
+    fclose(file);
+    return 0;
+}
 
 int hidder_init(int argc, char **argv) {
 
