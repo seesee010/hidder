@@ -5,4 +5,12 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/seesee010/hidder)
 ![GitHub License](https://img.shields.io/github/license/seesee010/hidder)
 
-Hide something in mind that git will read it
+Did you ever wanted to hide some cred to hide from git? Now you can. With `hidder`.
+## Purpose of the tool
+
+## Other libs in use
+See third-party-license directory for more information.
+If you wannt to lookup uthash-license, you can view it in ./third-party-license/uthash-license
+
+## License
+GPL-2.0. See License for more information.
