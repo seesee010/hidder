@@ -10,23 +10,50 @@
 #include "../lib/additional.h"
 #include "../lib/core.h"
 
-int writeIntoFile(char *filename, char *buffer, char *arg) {
+void getLineFromFile(char *filepath, char *out) {
+
+    if (out == NULL) {
+        fprintf(stderr, "[Error:] Can not change *out if it is NULL!\n");
+        return;
+    }
+
+    if (filepath == NULL) {
+        fprintf(stderr, "[Error:] Filepath is not set!\n");
+        return;
+    }
+
+    FILE *file = fopen(filepath, "w+");
+    fgets(out, 100, file);
+
+    return;
+}
+
+int writeIntoFile(char *filepath, char *buffer, char *arg) {
 
     if (buffer == NULL) {
         return 1;
     }
 
-    if (filename == NULL) {
+    if (filepath == NULL) {
         return 1;
     }
 
-    FILE *file = fopen(filename, arg);
+    FILE *file = fopen(filepath, arg);
 
     if (file == NULL) {
         return 1;
     }
 
-    fprintf(file, "%s\n", buffer);
+    char *nL = "";
+    char *out;
+
+    getLineFromFile(filepath, out);
+
+    if (out != NULL) {
+        nL = "\n";
+    }
+
+    fprintf(file, "%s%s", buffer, nL);
     fclose(file);
     return 0;
 }
